@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var parkingService: ParkingService
     private var updateRunnable: Runnable? = null
+    private var parkingAvailable: Boolean = false  // Variable para almacenar la disponibilidad
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +84,9 @@ class MainActivity : AppCompatActivity() {
         parkingService.getParkingStatus().enqueue(object : Callback<ParkingStatus> {
             override fun onResponse(call: Call<ParkingStatus>, response: Response<ParkingStatus>) {
                 val status = response.body()?.disponible ?: false
+                parkingAvailable = status // Actualizar la variable con el estado del estacionamiento
+
+                // Actualizar la interfaz según disponibilidad
                 if (status) {
                     statusText.text = "Disponible"
                     statusIndicator.setBackgroundColor(getColor(R.color.green))
@@ -111,13 +115,6 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return
         }
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
@@ -133,10 +130,19 @@ class MainActivity : AppCompatActivity() {
                     distance
                 )
 
-                if (distance[0] <= 50) { // Menos de 50 metros
-                    proximityText.text = "Bienvenido al estacionamiento."
+                // Cambiar mensaje según la disponibilidad del estacionamiento y la proximidad
+                if (parkingAvailable) {
+                    if (distance[0] <= 50) { // Menos de 50 metros
+                        proximityText.text = "Estás cerca de tu estacionamiento."
+                    } else {
+                        proximityText.text = "Estás lejos de tu estacionamiento."
+                    }
                 } else {
-                    proximityText.text = "Alguien más usó su espacio."
+                    if (distance[0] <= 50) {
+                        proximityText.text = "Bienvenido al estacionamiento."
+                    } else {
+                        proximityText.text = "Alguien más usó su espacio."
+                    }
                 }
             } else {
                 proximityText.text = "No se pudo determinar la ubicación."
