@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">sl_estacionamiento</string>
+    <string name="cargando">Cargando...</string>
+    <string name="ubicaci_n_no_detectada">Ubicación no detectada.</string>
+</resources>
