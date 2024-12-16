@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <!-- Define the primary colors for your app -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+
+        <!-- Background and text colors -->
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/gray</item>
+
+        <!-- Button styles -->
+        <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
+
+        <!-- Customize toolbar -->
+        <item name="android:toolbarStyle">@style/Widget.AppCompat.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.AppCompat.ActionBar</item>
+
+        <!-- Colors for status bar -->
+        <item name="android:statusBarColor">@color/purple_700</item>
+
+        <!-- Customize the indicator colors -->
+        <item name="colorError">@color/red</item>
+    </style>
+
+    <!-- You can create custom styles for other widgets or views here -->
+    <style name="CustomTextView" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>
