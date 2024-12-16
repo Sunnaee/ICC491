@@ -8,6 +8,6 @@
 * Usar base de datos MONGODB
 * Usar interfaces WEB,  escritorio  y móvil para utilizar en tiempo REAL
 
-##Ramas:
+## Ramas:
 - "app": códigos de la aplicación de celular.
 - "servidor": códigos dentro del servidor en la carpeta "aws", código arduino en la carpeta "arduino" y código del cliente de escritorio.
